@@ -13,19 +13,15 @@ import android.view.ViewGroup;
 
 import com.touyuanren.perfectplay.R;
 import com.touyuanren.perfectplay.bean.AppInfo;
-import com.touyuanren.perfectplay.bean.PageBean;
-import com.touyuanren.perfectplay.http.ApiService;
-import com.touyuanren.perfectplay.http.HttpManager;
-import com.touyuanren.perfectplay.ui.adapter.RecomendAppAdapter;
+import com.touyuanren.perfectplay.data.http.ABHttpManager;
+import com.touyuanren.perfectplay.data.http.ApiService;
+import com.touyuanren.perfectplay.ui.adapter.RecommendAppAdapter;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * Created by Liang on 2017/10/9 0009.
@@ -36,7 +32,7 @@ public class RecommendFragmentMvc extends Fragment {
     @BindView(R.id.recycle_view)
     RecyclerView mRecycleView;
     Unbinder unbinder;
-    private RecomendAppAdapter adapter;
+    private RecommendAppAdapter adapter;
 
     @Nullable
     @Override
@@ -48,22 +44,22 @@ public class RecommendFragmentMvc extends Fragment {
     }
 
     private void initData() {
-        HttpManager manager = new HttpManager();
+        ABHttpManager manager = new ABHttpManager();
         ApiService service = manager.getRetrofit(manager.getOkHttpClient()).create(ApiService.class);
-        service.getApps("{'page':0}").enqueue(new Callback<PageBean<AppInfo>>() {
-            @Override
-            public void onResponse(Call<PageBean<AppInfo>> call, Response<PageBean<AppInfo>> response) {
-                PageBean<AppInfo> info = response.body();
-                //进行赋值
-                List<AppInfo> datas = info.getDatas();
-                initRecyclerView(datas);
-            }
-
-            @Override
-            public void onFailure(Call<PageBean<AppInfo>> call, Throwable t) {
-
-            }
-        });
+//        service.getApps("{'page':0}").enqueue(new Callback<PageBean<AppInfo>>() {
+//            @Override
+//            public void onResponse(Call<PageBean<AppInfo>> call, Response<PageBean<AppInfo>> response) {
+//                PageBean<AppInfo> info = response.body();
+//                //进行赋值
+//                List<AppInfo> datas = info.getDatas();
+//                initRecyclerView(datas);
+//            }
+//
+//            @Override
+//            public void onFailure(Call<PageBean<AppInfo>> call, Throwable t) {
+//
+//            }
+//        });
     }
 
     @Override
@@ -73,7 +69,7 @@ public class RecommendFragmentMvc extends Fragment {
     }
 
     private void initRecyclerView(List<AppInfo> datas) {
-        adapter = new RecomendAppAdapter(getActivity(), datas);
+        adapter = new RecommendAppAdapter(getActivity(), datas);
         //为RecyclerView设置布局管理器
         mRecycleView.setLayoutManager(new LinearLayoutManager(getActivity()));
         //为RecyclerView设置分割线(这个可以对DividerItemDecoration进行修改，自定义)

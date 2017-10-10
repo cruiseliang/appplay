@@ -22,12 +22,12 @@ import butterknife.ButterKnife;
  * Created by Liang on 2017/10/9 0009.
  */
 
-public class RecomendAppAdapter extends RecyclerView.Adapter<RecomendAppAdapter.ViewHolder> {
+public class RecommendAppAdapter extends RecyclerView.Adapter<RecommendAppAdapter.ViewHolder> {
     private Context mContext;
     private List<AppInfo> listData;
     private LayoutInflater inflater;
 
-    public RecomendAppAdapter(Context context, List<AppInfo> listData) {
+    public RecommendAppAdapter(Context context, List<AppInfo> listData) {
         this.listData = listData;
         this.mContext = context;
         inflater = LayoutInflater.from(context);

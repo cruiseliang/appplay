@@ -1,7 +1,6 @@
 package com.touyuanren.perfectplay.presenter.contract;
 
 import com.touyuanren.perfectplay.bean.AppInfo;
-import com.touyuanren.perfectplay.presenter.BasePresenter;
 import com.touyuanren.perfectplay.ui.BaseView;
 
 import java.util.List;
@@ -15,12 +14,6 @@ public interface RecommendContract {
         void showNoData();
         void showResult(List<AppInfo> datas);
         void showError(String msg);
-    }
-
-    ;
-
-    interface Presenter extends BasePresenter {
-        public void requestDatas();
     }
 
 }

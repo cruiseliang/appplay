@@ -1,12 +1,12 @@
-package com.touyuanren.perfectplay.http;
+package com.touyuanren.perfectplay.data.http;
 
 
 import com.touyuanren.perfectplay.bean.AppInfo;
 import com.touyuanren.perfectplay.bean.PageBean;
 
-import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
+import rx.Observable;
 
 /**
  * Created by Ivan on 2016/12/30.
@@ -20,8 +20,10 @@ public interface ApiService {
 
 
 
-    @GET("featured")
-    public Call<PageBean<AppInfo>> getApps(@Query("p") String jsonParam);
+//    @GET("featured")
+//    public Call<PageBean<AppInfo>> getApps(@Query("p") String jsonParam);
 
+    @GET("featured")
+    public Observable<PageBean<AppInfo>> getApps(@Query("p") String jsonParam);
 
 }

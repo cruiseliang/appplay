@@ -1,4 +1,4 @@
-package com.touyuanren.perfectplay.http;
+package com.touyuanren.perfectplay.data.http;
 
 import java.util.concurrent.TimeUnit;
 
@@ -11,8 +11,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * Created by Ivan on 2016/12/30.
  */
-
-public class HttpManager {
+//已废弃
+public class ABHttpManager {
 
 
     public OkHttpClient getOkHttpClient(){
