@@ -1,7 +1,8 @@
 package com.touyuanren.perfectplay.di.module;
 
+import android.app.Application;
+
 import com.google.gson.Gson;
-import com.touyuanren.perfectplay.AppApplication;
 
 import javax.inject.Singleton;
 
@@ -13,15 +14,15 @@ import dagger.Provides;
  */
 @Module
 public class AppModule {
-    private AppApplication application;
+    private Application application;
 
-    public AppModule(AppApplication application) {
+    public AppModule(Application application) {
         this.application = application;
     }
 
     @Provides
     @Singleton
-    public AppApplication provideApplication() {
+    public Application provideApplication() {
         return application;
 
     }

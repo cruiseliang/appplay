@@ -1,5 +1,8 @@
 package com.touyuanren.perfectplay.presenter;
 
+import android.content.Context;
+import android.support.v4.app.Fragment;
+
 import com.touyuanren.perfectplay.ui.BaseView;
 
 /**
@@ -9,9 +12,20 @@ import com.touyuanren.perfectplay.ui.BaseView;
 public class BasePresenter<M, V extends BaseView> {
     protected V mView;
     protected M mModel;
+    protected Context context;
 
     public BasePresenter(V v, M m) {
         this.mView = v;
         this.mModel = m;
+        initContext();
+
+    }
+
+    private void initContext() {
+        if (mView instanceof Fragment) {
+            context = ((Fragment) mView).getActivity();
+        } else {
+            context = (Context) mView;
+        }
     }
 }

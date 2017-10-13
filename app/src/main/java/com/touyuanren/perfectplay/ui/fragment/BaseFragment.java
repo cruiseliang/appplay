@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import com.touyuanren.perfectplay.AppApplication;
 import com.touyuanren.perfectplay.di.component.AppComponent;
 import com.touyuanren.perfectplay.presenter.BasePresenter;
+import com.touyuanren.perfectplay.ui.BaseView;
 
 import javax.inject.Inject;
 
@@ -17,8 +18,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 
-
-public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
+public abstract class BaseFragment<T extends BasePresenter> extends Fragment implements BaseView {
 
 
     private Unbinder mUnbinder;
@@ -30,7 +30,6 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
 
     @Inject
     T mPresenter;
-
 
     @Nullable
     @Override
@@ -68,6 +67,19 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
 
 
     public abstract void init();
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void showError(String msg) {
 
 
+    }
+
+    @Override
+    public void dismissLoading() {
+
+    }
 }

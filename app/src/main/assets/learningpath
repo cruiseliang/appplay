@@ -4,3 +4,5 @@
 3.android  开源库使用：http://blog.csdn.net/cuipp0509/article/details/60778152?utm_source=itdadao&utm_medium=referral
 4.recyclerview 使用
 5.path（贝塞尔曲线）
+6.baseRecyclerviewAdapterHelper  对adapter进行的封装
+7. rxbus   rxjava  retrofit   mvp   rxbinding  dagger2  glide   多线程下载  断点续传   app批量升级  静默安装

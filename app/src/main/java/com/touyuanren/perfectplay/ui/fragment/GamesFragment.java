@@ -1,31 +1,34 @@
 package com.touyuanren.perfectplay.ui.fragment;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.touyuanren.perfectplay.R;
+import com.touyuanren.perfectplay.di.component.AppComponent;
+import com.touyuanren.perfectplay.di.component.DaggerAppInfoComponent;
+import com.touyuanren.perfectplay.di.module.AppInfoModule;
+import com.touyuanren.perfectplay.presenter.AppInfoPresenter;
+import com.touyuanren.perfectplay.ui.adapter.AppInfoAdapter;
 
 
 /**
  * Created by Ivan on 16/9/26.
  */
 
-public class GamesFragment extends Fragment {
+public class GamesFragment extends BaseAppInfoFragment {
 
 
-
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public void setupAcitivtyComponent(AppComponent appComponent) {
 
+//        DaggerTopListComponent.builder().build().inject();
+        DaggerAppInfoComponent.builder().appComponent(appComponent).appInfoModule(new AppInfoModule(this))
+                .build().injectGamesFragment(this);
+    }
 
-        View view = inflater.inflate(R.layout.fragment_games,container,false);
-        return view;
+    @Override
+    int type() {
+        return AppInfoPresenter.GAME;
+    }
 
-
+    @Override
+    AppInfoAdapter buildAdapter() {
+        return AppInfoAdapter.builder().showPosition(false).showBrief(true).showCategoryName(true).build();
     }
 }

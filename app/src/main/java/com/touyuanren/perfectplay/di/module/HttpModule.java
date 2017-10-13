@@ -1,5 +1,10 @@
 package com.touyuanren.perfectplay.di.module;
 
+import android.app.Application;
+
+import com.google.gson.Gson;
+import com.touyuanren.perfectplay.common.http.CommonParamsInterceptor;
+import com.touyuanren.perfectplay.common.rx.RxErrorHandler;
 import com.touyuanren.perfectplay.data.http.ApiService;
 
 import java.util.concurrent.TimeUnit;
@@ -22,7 +27,7 @@ public class HttpModule {
 
     @Provides
     @Singleton
-    public OkHttpClient provideOkHttpClient() {
+    public OkHttpClient provideOkHttpClient(Application application,Gson gson) {
         // log用拦截器
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
 
@@ -36,6 +41,7 @@ public class HttpModule {
                 // HeadInterceptor实现了Interceptor，用来往Request Header添加一些业务相关数据，如APP版本，token信息
 //                .addInterceptor(new HeadInterceptor())
                 .addInterceptor(logging)
+                .addInterceptor(new CommonParamsInterceptor(application,gson))
                 // 连接超时时间设置
                 .connectTimeout(10, TimeUnit.SECONDS)
                 // 读取超时时间设置
@@ -60,5 +66,10 @@ public class HttpModule {
     @Singleton
     public  ApiService   provideApiService(Retrofit retrofit){
         return  retrofit.create(ApiService.class);
+    }
+    @Provides
+    @Singleton
+    public RxErrorHandler providerErrorHandler(Application application){
+        return  new RxErrorHandler(application);
     }
 }
